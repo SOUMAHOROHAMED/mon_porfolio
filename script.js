@@ -5,38 +5,39 @@
 const menuToggle = document.getElementById("menu-toggle");
 const navbar = document.getElementById("navbar");
 
-menuToggle.addEventListener("click", () => {
+if (menuToggle && navbar) {
 
-    navbar.classList.toggle("open");
+    menuToggle.addEventListener("click", () => {
 
-    if (navbar.classList.contains("open")) {
+        navbar.classList.toggle("open");
 
-        menuToggle.textContent = "✕";
+        if (navbar.classList.contains("open")) {
 
-    } else {
+            menuToggle.textContent = "✕";
 
-        menuToggle.textContent = "☰";
+        } else {
 
-    }
+            menuToggle.textContent = "☰";
 
-});
-
-
-/* Fermer le menu lorsqu'on clique sur un lien */
-
-const navLinks = document.querySelectorAll(".nav-link");
-
-navLinks.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navbar.classList.remove("open");
-
-        menuToggle.textContent = "☰";
+        }
 
     });
 
-});
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navbar.classList.remove("open");
+
+            menuToggle.textContent = "☰";
+
+        });
+
+    });
+
+}
 
 
 /* =====================================================
@@ -47,43 +48,47 @@ const themeToggle =
     document.getElementById("theme-toggle");
 
 
-const savedTheme =
-    localStorage.getItem("theme");
+if (themeToggle) {
+
+    const savedTheme =
+        localStorage.getItem("theme");
 
 
-if (savedTheme === "dark") {
+    if (savedTheme === "dark") {
 
-    document.body.classList.add("dark-mode");
-
-    themeToggle.textContent = "☀️";
-
-}
-
-
-themeToggle.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark-mode");
-
-
-    const darkMode =
-        document.body.classList.contains("dark-mode");
-
-
-    if (darkMode) {
+        document.body.classList.add("dark-mode");
 
         themeToggle.textContent = "☀️";
 
-        localStorage.setItem("theme", "dark");
-
-    } else {
-
-        themeToggle.textContent = "🌙";
-
-        localStorage.setItem("theme", "light");
-
     }
 
-});
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark-mode");
+
+
+        const darkMode =
+            document.body.classList.contains("dark-mode");
+
+
+        if (darkMode) {
+
+            themeToggle.textContent = "☀️";
+
+            localStorage.setItem("theme", "dark");
+
+        } else {
+
+            themeToggle.textContent = "🌙";
+
+            localStorage.setItem("theme", "light");
+
+        }
+
+    });
+
+}
 
 
 /* =====================================================
@@ -94,37 +99,44 @@ const backToTop =
     document.getElementById("back-to-top");
 
 
-window.addEventListener("scroll", () => {
+if (backToTop) {
 
-    if (window.scrollY > 400) {
+    window.addEventListener("scroll", () => {
 
-        backToTop.classList.add("show");
+        if (window.scrollY > 400) {
 
-    } else {
+            backToTop.classList.add("show");
 
-        backToTop.classList.remove("show");
+        } else {
 
-    }
+            backToTop.classList.remove("show");
 
-});
-
-
-backToTop.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
+        }
 
     });
 
-});
+
+    backToTop.addEventListener("click", () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    });
+
+}
 
 
 /* =====================================================
    NAVIGATION ACTIVE
 ===================================================== */
+
+const navLinks =
+    document.querySelectorAll(".nav-link");
 
 const sections =
     document.querySelectorAll("section");
@@ -269,13 +281,19 @@ const typingElement =
 
 
 const text =
-    "Administrateur de bases de données & Développeur Front-End";
+    "Administrateur de bases de données junior";
 
 
 let index = 0;
 
 
 function typeWriter() {
+
+    if (!typingElement) {
+
+        return;
+
+    }
 
     if (index < text.length) {
 
@@ -295,9 +313,13 @@ function typeWriter() {
    de lancer l'animation.
 */
 
-typingElement.textContent = "";
+if (typingElement) {
 
-typeWriter();
+    typingElement.textContent = "";
+
+    typeWriter();
+
+}
 
 
 /* =====================================================
@@ -307,95 +329,132 @@ typeWriter();
 const form =
     document.getElementById("contact-form");
 
-
-form.addEventListener("submit", (event) => {
-
-    event.preventDefault();
+const statusMessage =
+    document.querySelector(".form-status");
 
 
-    const nom =
-        document.getElementById("nom");
+if (form) {
 
-    const email =
-        document.getElementById("email");
+    form.addEventListener("submit", (event) => {
 
-    const message =
-        document.getElementById("message");
+        event.preventDefault();
 
 
-    let valid = true;
+        const nom =
+            document.getElementById("nom");
+
+        const email =
+            document.getElementById("email");
+
+        const message =
+            document.getElementById("message");
 
 
-    /* Nettoyage des erreurs */
-
-    document
-        .querySelectorAll(".error-message")
-        .forEach(error => {
-
-            error.textContent = "";
-
-        });
+        let valid = true;
 
 
-    /* Nom */
+        if (statusMessage) {
 
-    if (nom.value.trim().length < 2) {
+            statusMessage.textContent = "";
 
-        nom
-            .nextElementSibling
-            .textContent =
-            "Veuillez entrer votre nom.";
+            statusMessage.classList.remove("error");
 
-        valid = false;
-
-    }
+        }
 
 
-    /* Email */
+        /* Nettoyage des erreurs */
 
-    const emailRegex =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        document
+            .querySelectorAll(".error-message")
+            .forEach(error => {
 
+                error.textContent = "";
 
-    if (!emailRegex.test(email.value.trim())) {
-
-        email
-            .nextElementSibling
-            .textContent =
-            "Veuillez entrer une adresse email valide.";
-
-        valid = false;
-
-    }
+            });
 
 
-    /* Message */
+        /* Nom */
 
-    if (message.value.trim().length < 10) {
+        if (nom.value.trim().length < 2) {
 
-        message
-            .nextElementSibling
-            .textContent =
-            "Votre message doit contenir au moins 10 caractères.";
+            nom
+                .nextElementSibling
+                .textContent =
+                "Veuillez entrer votre nom.";
 
-        valid = false;
+            valid = false;
 
-    }
+        }
 
 
-    /* Si tout est correct */
+        /* Email */
 
-    if (valid) {
+        const emailRegex =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        alert(
-            "Merci ! Votre message a bien été préparé."
-        );
 
-        form.reset();
+        if (!emailRegex.test(email.value.trim())) {
 
-    }
+            email
+                .nextElementSibling
+                .textContent =
+                "Veuillez entrer une adresse email valide.";
 
-});
+            valid = false;
+
+        }
+
+
+        /* Message */
+
+        if (message.value.trim().length < 10) {
+
+            message
+                .nextElementSibling
+                .textContent =
+                "Votre message doit contenir au moins 10 caractères.";
+
+            valid = false;
+
+        }
+
+
+        /* Si tout est correct */
+
+        if (valid) {
+
+            const subject =
+                encodeURIComponent("Message depuis le portfolio");
+
+            const body =
+                encodeURIComponent(
+                    `Nom : ${nom.value.trim()}\nEmail : ${email.value.trim()}\n\n${message.value.trim()}`
+                );
+
+            if (statusMessage) {
+
+                statusMessage.textContent =
+                    "Votre messagerie va s’ouvrir avec le message. Pensez à confirmer l’envoi.";
+
+                statusMessage.classList.remove("error");
+
+            }
+
+            window.location.href =
+                `mailto:soumahorohamed1802@gmail.com?subject=${subject}&body=${body}`;
+
+        } else if (statusMessage) {
+
+            statusMessage.textContent =
+                "Veuillez corriger les informations du formulaire.";
+
+            statusMessage.classList.add("error");
+
+        }
+
+    });
+
+}
 
 
 /* =====================================================
@@ -406,5 +465,9 @@ const currentYear =
     document.getElementById("current-year");
 
 
-currentYear.textContent =
-    new Date().getFullYear();
+if (currentYear) {
+
+    currentYear.textContent =
+        new Date().getFullYear();
+
+}

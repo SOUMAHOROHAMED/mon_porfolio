@@ -545,6 +545,26 @@ textarea {
     margin-bottom: 20px;
 }
 
+.skill-icon img {
+
+    width: 40px;
+
+    height: 40px;
+
+    object-fit: contain;
+}
+
+.method-mark {
+
+    font-size: 0.72rem;
+
+    font-weight: bold;
+
+    line-height: 1.15;
+
+    text-align: center;
+}
+
 
 .skill-card h3 {
 
@@ -575,6 +595,12 @@ textarea {
 .skill-list span,
 .project-technologies span {
 
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
     background: var(--vert-clair);
 
     color: var(--vert-fonce);
@@ -586,6 +612,15 @@ textarea {
     font-size: 0.75rem;
 
     font-weight: bold;
+}
+
+.technology-logo img {
+
+    width: 20px;
+
+    height: 20px;
+
+    object-fit: contain;
 }
 
 
@@ -691,6 +726,24 @@ textarea {
     font-size: 4rem;
 
     background: var(--vert-clair);
+}
+
+.project-logo {
+
+    width: 72px;
+
+    height: 72px;
+
+    object-fit: contain;
+}
+
+.project-method-mark {
+
+    color: var(--vert-fonce);
+
+    font-size: 1.25rem;
+
+    font-weight: bold;
 }
 
 
@@ -990,6 +1043,22 @@ textarea {
     width: 100%;
 
     border: none;
+}
+
+.form-status {
+
+    min-height: 24px;
+
+    margin-bottom: 15px;
+
+    font-weight: bold;
+
+    color: var(--vert-fonce);
+}
+
+.form-status.error {
+
+    color: #dc2626;
 }
 
 .footer {
