@@ -446,27 +446,9 @@ textarea {
 
 .about-container {
 
-    display: grid;
+    max-width: 900px;
 
-    grid-template-columns: 1fr 1.3fr;
-
-    align-items: center;
-
-    gap: 70px;
-}
-
-
-.about-image img {
-
-    width: 100%;
-
-    max-width: 400px;
-
-    margin: auto;
-
-    border-radius: 20px;
-
-    box-shadow: var(--ombre);
+    margin: 0 auto;
 }
 
 
@@ -1433,14 +1415,6 @@ body.dark-mode .nav-link {
     .section-title h2 {
 
         font-size: 2rem;
-    }
-
-
-    .about-container {
-
-        grid-template-columns: 1fr;
-
-        gap: 35px;
     }
 
 
