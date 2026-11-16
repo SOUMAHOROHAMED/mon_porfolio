@@ -1,165 +1,206 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="Portfolio de Hamed Soumahoro, Administrateur de bases de données junior."
-    >
+    <title>Hamed Soumahoro — Administrateur de bases de données junior</title>
+    <meta name="description" content="Portfolio de Hamed Soumahoro, administrateur de bases de données junior : SQL, MySQL, PostgreSQL, MERISE, Linux Ubuntu, Git et GitHub.">
+    <meta name="author" content="Hamed Soumahoro">
+    <meta name="theme-color" content="#06100b">
 
-    <title>Portfolio - Hamed Soumahoro</title>
+    <!-- Aperçu lors du partage (WhatsApp, LinkedIn, Facebook…) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hamed Soumahoro — Administrateur de bases de données junior">
+    <meta property="og:description" content="SQL, MySQL, PostgreSQL, MERISE, Linux Ubuntu, Git et GitHub. Découvrez mes projets et mon parcours.">
+    <meta property="og:url" content="https://mon-porfolio-iota.vercel.app/">
+    <meta property="og:image" content="https://mon-porfolio-iota.vercel.app/img/photodeprofil.jpeg">
+    <meta property="og:locale" content="fr_FR">
 
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316a34a'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='white'%3ESH%3C/text%3E%3C/svg%3E">
+
+    <!-- Applique le thème avant l'affichage (évite le flash blanc) -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (bibliothèque d'icônes) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-   
+    <a href="#contenu" class="skip-link">Aller au contenu</a>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
 
-    <header class="header">
+    <!-- ======================= HEADER ======================= -->
+    <header class="header" id="header">
+        <div class="nav-container">
 
-        <div class="container nav-container">
-
-            <a href="#accueil" class="logo">
-                SOUMAHORO HAMED
+            <a href="#accueil" class="logo" aria-label="Retour à l'accueil">
+                <span class="logo-mark">SH</span>
+                <span class="logo-text">Soumahoro Hamed</span>
             </a>
 
-            <nav class="navbar" id="navbar">
-
-                <a href="#accueil" class="nav-link active">
-                    Accueil
-                </a>
-
-                <a href="#apropos" class="nav-link">
-                    À propos
-                </a>
-
-                <a href="#competences" class="nav-link">
-                    Compétences
-                </a>
-
-                <a href="#projets" class="nav-link">
-                    Projets
-                </a>
-
-                <a href="#formation" class="nav-link">
-                    Formation
-                </a>
-
-                <a href="#contact" class="nav-link">
-                    Contact
-                </a>
-
+            <nav class="navbar" id="navbar" aria-label="Navigation principale">
+                <a href="#accueil" class="nav-link active"><i class="fa-solid fa-house"></i> Accueil</a>
+                <a href="#apropos" class="nav-link"><i class="fa-solid fa-user"></i> À propos</a>
+                <a href="#competences" class="nav-link"><i class="fa-solid fa-layer-group"></i> Compétences</a>
+                <a href="#projets" class="nav-link"><i class="fa-solid fa-folder-open"></i> Projets</a>
+                <a href="#formation" class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Formation</a>
+                <a href="#contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a>
             </nav>
 
             <div class="header-buttons">
-
-                <button
-                    id="theme-toggle"
-                    class="theme-button"
-                    aria-label="Changer le thème"
-                >
-                    🌙
+                <button id="theme-toggle" class="icon-button" aria-label="Changer le thème">
+                    <i class="fa-solid fa-moon"></i>
                 </button>
-
-                <button
-                    id="menu-toggle"
-                    class="menu-button"
-                    aria-label="Ouvrir le menu"
-                >
-                    ☰
+                <button id="menu-toggle" class="icon-button menu-button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navbar">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
-
             </div>
 
         </div>
-
     </header>
 
 
+    <main id="contenu">
 
-    <main>
-
+        <!-- ======================= ACCUEIL ======================= -->
         <section id="accueil" class="hero">
-
             <div class="container hero-container">
 
                 <div class="hero-content">
 
-                    <p class="hero-small">
-                        Bonjour, je suis
-                    </p>
+                    <span class="badge">
+                        <span class="badge-dot"></span>
+                        Licence 2 · Spécialité Base de Données
+                    </span>
 
-                    <h1>
-                        Hamed Soumahoro
-                    </h1>
+                    <p class="hero-small">Bonjour, je suis</p>
 
-                    <h2 id="typing-text">
-                        Administrateur de bases de données junior
+                    <h1>Hamed <span class="gradient-text">Soumahoro</span></h1>
+
+                    <h2 class="hero-role">
+                        <i class="fa-solid fa-database"></i>
+                        <span id="typing-text">Administrateur de bases de données junior</span><span class="cursor" aria-hidden="true"></span>
                     </h2>
 
                     <p class="hero-description">
-                        Étudiant en informatique passionné par le développement
-                        web, la conception de bases de données et les solutions
-                        numériques qui améliorent les usages quotidiens.
+                        Étudiant en informatique passionné par la conception de bases de
+                        données, le développement web et les solutions numériques qui
+                        améliorent les usages quotidiens.
                     </p>
 
                     <div class="hero-buttons">
-
                         <a href="#projets" class="btn btn-primary">
-                            Voir mes projets
+                            Voir mes projets <i class="fa-solid fa-arrow-right"></i>
                         </a>
-
                         <a href="#contact" class="btn btn-secondary">
-                            Me contacter
+                            <i class="fa-regular fa-envelope"></i> Me contacter
                         </a>
+                    </div>
 
+                    <div class="hero-socials">
+                        <a href="https://github.com/SOUMAHOROHAMED" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/hamed-soumahoro-ba98a1390/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/2250768930240" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="mailto:soumahorohamed1802@gmail.com" aria-label="Email" title="Email"><i class="fa-solid fa-envelope"></i></a>
                     </div>
 
                 </div>
 
 
-                <div class="hero-image">
+                <div class="hero-visual">
 
-                    <div class="image-circle">
+                    <div class="photo-frame">
+                        <img src="img/photodeprofil.jpeg" alt="Photo de Hamed Soumahoro" width="420" height="440">
+                    </div>
 
-                        <img
-                            src="img/photodeprofil.jpeg"
-                            alt="Photo de Hamed Soumahoro"
-                        >
+                    <div class="float-chip chip-1">
+                        <img src="img/technologies/postgresql-original.svg" alt="" width="22" height="22"> PostgreSQL
+                    </div>
+                    <div class="float-chip chip-2">
+                        <img src="img/technologies/mysql-original.svg" alt="" width="22" height="22"> MySQL
+                    </div>
+                    <div class="float-chip chip-3">
+                        <i class="fa-brands fa-ubuntu" style="color:#e95420"></i> Ubuntu
+                    </div>
 
+                    <div class="code-card" aria-hidden="true">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <code><span class="k">SELECT</span> competences<br><span class="k">FROM</span> hamed<br><span class="k">WHERE</span> passion = <span class="s">'données'</span>;</code>
                     </div>
 
                 </div>
 
             </div>
 
+            <a href="#apropos" class="scroll-hint" aria-label="Défiler vers le bas">
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
         </section>
 
 
+        <!-- ======================= CHIFFRES ======================= -->
+        <section class="stats" aria-label="En bref">
+            <div class="container stats-grid">
 
+                <div class="stat">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <strong>L2</strong>
+                    <span>Licence en informatique</span>
+                </div>
+
+                <div class="stat">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <strong data-count="3">3</strong>
+                    <span>Projets réalisés</span>
+                </div>
+
+                <div class="stat">
+                    <i class="fa-solid fa-code"></i>
+                    <strong data-count="9">9</strong>
+                    <span>Technologies maîtrisées</span>
+                </div>
+
+                <div class="stat">
+                    <i class="fa-solid fa-database"></i>
+                    <strong>BDD</strong>
+                    <span>Spécialité</span>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ======================= À PROPOS ======================= -->
         <section id="apropos" class="section">
-
             <div class="container">
 
                 <div class="section-title">
-
-                    <p>Découvrez mon parcours</p>
-
+                    <p><i class="fa-solid fa-user"></i> Découvrez mon parcours</p>
                     <h2>À propos de moi</h2>
-
                 </div>
 
                 <div class="about-container">
 
                     <div class="about-content">
-
-                        <h3>
-                            Passionné par l'informatique et les nouvelles technologies
-                        </h3>
+                        <h3>Passionné par l'informatique et les nouvelles technologies</h3>
 
                         <p>
                             Je suis étudiant en informatique, avec une spécialité
@@ -183,652 +224,322 @@
                         </p>
 
                         <a href="#contact" class="btn btn-primary">
-                            Parlons ensemble
+                            Parlons ensemble <i class="fa-solid fa-arrow-right"></i>
                         </a>
+                    </div>
+
+                    <div class="about-cards">
+
+                        <div class="mini-card spotlight">
+                            <div class="mini-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                            <div>
+                                <h4>Performance</h4>
+                                <p>Des requêtes et des structures pensées pour aller vite.</p>
+                            </div>
+                        </div>
+
+                        <div class="mini-card spotlight">
+                            <div class="mini-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div>
+                                <h4>Sécurité</h4>
+                                <p>Protéger les données et en maîtriser l'accès.</p>
+                            </div>
+                        </div>
+
+                        <div class="mini-card spotlight">
+                            <div class="mini-icon"><i class="fa-solid fa-server"></i></div>
+                            <div>
+                                <h4>Disponibilité</h4>
+                                <p>Garantir que l'information reste accessible.</p>
+                            </div>
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
 
-
-        <section id="competences" class="section section-light">
-
+        <!-- ======================= COMPÉTENCES ======================= -->
+        <section id="competences" class="section section-alt">
             <div class="container">
 
                 <div class="section-title">
-
-                    <p>Mes domaines de compétences</p>
-
+                    <p><i class="fa-solid fa-layer-group"></i> Mes domaines de compétences</p>
                     <h2>Mes compétences</h2>
-
                 </div>
-
 
                 <div class="skills-grid">
 
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            <img src="img/technologies/html5-original.svg" alt="">
-                        </div>
-
+                    <div class="skill-card spotlight">
+                        <div class="skill-icon"><i class="fa-brands fa-html5" style="color:#e34f26"></i></div>
                         <h3>Développement Web</h3>
-
-                        <p>
-                            Conception de pages web modernes, simples et
-                            ergonomiques.
-                        </p>
-
-                        <div class="skill-list">
-
-                            <span class="technology-logo">
-                                <img src="img/technologies/html5-original.svg" alt="">
-                                HTML5
-                            </span>
-                            <span class="technology-logo">
-                                <img src="img/technologies/css3-original.svg" alt="">
-                                CSS3
-                            </span>
-
+                        <p>Conception de pages web modernes, simples et ergonomiques.</p>
+                        <div class="tags">
+                            <span class="tag"><i class="fa-brands fa-html5" style="color:#e34f26"></i> HTML5</span>
+                            <span class="tag"><i class="fa-brands fa-css3-alt" style="color:#2d8cf0"></i> CSS3</span>
                         </div>
-
                     </div>
 
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            <img src="img/technologies/mysql-original.svg" alt="">
-                        </div>
-
+                    <div class="skill-card spotlight">
+                        <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
                         <h3>Bases de données</h3>
-
-                        <p>
-                            Modélisation, organisation, gestion et sécurisation des
-                            données pour des systèmes fiables.
-                        </p>
-
-                        <div class="skill-list">
-
-                            <span>SQL</span>
-                            <span class="technology-logo">
-                                <img src="img/technologies/mysql-original.svg" alt="">
-                                MySQL
-                            </span>
-                            <span class="technology-logo">
-                                <img src="img/technologies/postgresql-original.svg" alt="">
-                                PostgreSQL
-                            </span>
-
+                        <p>Modélisation, organisation, gestion et sécurisation des données pour des systèmes fiables.</p>
+                        <div class="tags">
+                            <span class="tag"><i class="fa-solid fa-terminal"></i> SQL</span>
+                            <span class="tag"><img src="img/technologies/mysql-original.svg" alt="" width="16" height="16"> MySQL</span>
+                            <span class="tag"><img src="img/technologies/postgresql-original.svg" alt="" width="16" height="16"> PostgreSQL</span>
                         </div>
-
                     </div>
 
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            <span class="method-mark">MCD<br>MLD</span>
-                        </div>
-
+                    <div class="skill-card spotlight">
+                        <div class="skill-icon"><i class="fa-solid fa-diagram-project"></i></div>
                         <h3>Conception de bases de données</h3>
-
-                        <p>
-                            Organisation et modélisation des données pour concevoir
-                            des bases cohérentes et adaptées aux besoins.
-                        </p>
-
-                        <div class="skill-list">
-
-                            <span>MERISE</span>
-                            <span>Modélisation</span>
-
+                        <p>Organisation et modélisation des données pour concevoir des bases cohérentes et adaptées aux besoins.</p>
+                        <div class="tags">
+                            <span class="tag"><i class="fa-solid fa-sitemap"></i> MERISE</span>
+                            <span class="tag"><i class="fa-solid fa-table-cells"></i> Modélisation</span>
                         </div>
-
                     </div>
 
-
-                    <div class="skill-card">
-
-                        <div class="skill-icon">
-                            <img src="img/technologies/git-original.svg" alt="">
-                        </div>
-
+                    <div class="skill-card spotlight">
+                        <div class="skill-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                         <h3>Outils informatiques</h3>
-
-                        <p>
-                            Utilisation des outils de travail collaboratif et de
-                            gestion de projets informatiques.
-                        </p>
-
-                        <div class="skill-list">
-
-                            <span class="technology-logo">
-                                <img src="img/technologies/git-original.svg" alt="">
-                                Git
-                            </span>
-                            <span class="technology-logo">
-                                <img src="img/technologies/github-original.svg" alt="">
-                                GitHub
-                            </span>
-                            <span class="technology-logo">
-                                <img src="img/technologies/ubuntu-original.svg" alt="">
-                                Ubuntu
-                            </span>
-
+                        <p>Utilisation des outils de travail collaboratif et de gestion de projets informatiques.</p>
+                        <div class="tags">
+                            <span class="tag"><i class="fa-brands fa-git-alt" style="color:#f05133"></i> Git</span>
+                            <span class="tag"><i class="fa-brands fa-github"></i> GitHub</span>
+                            <span class="tag"><i class="fa-brands fa-ubuntu" style="color:#e95420"></i> Ubuntu</span>
                         </div>
-
                     </div>
 
                 </div>
 
 
-                <div class="skills-progress">
+                <div class="skills-progress spotlight">
+
+                    <h3><i class="fa-solid fa-chart-simple"></i> Niveau actuel</h3>
 
                     <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>HTML / CSS</span>
-                            <span>70%</span>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="70%"
-                            ></div>
-                        </div>
-
+                        <div class="progress-info"><span>HTML / CSS</span><span>70%</span></div>
+                        <div class="progress-bar"><div class="progress" data-width="70%"></div></div>
                     </div>
 
-
                     <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>SQL / MySQL / PostgreSQL</span>
-                            <span>50%</span>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="50%"
-                            ></div>
-                        </div>
-
+                        <div class="progress-info"><span>SQL / MySQL / PostgreSQL</span><span>50%</span></div>
+                        <div class="progress-bar"><div class="progress" data-width="50%"></div></div>
                     </div>
 
-
                     <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>MERISE / Modélisation</span>
-                            <span>65%</span>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="65%"
-                            ></div>
-                        </div>
-
+                        <div class="progress-info"><span>MERISE / Modélisation</span><span>65%</span></div>
+                        <div class="progress-bar"><div class="progress" data-width="65%"></div></div>
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
 
-
+        <!-- ======================= PROJETS ======================= -->
         <section id="projets" class="section">
-
             <div class="container">
 
                 <div class="section-title">
-
-                    <p>Mes réalisations</p>
-
+                    <p><i class="fa-solid fa-folder-open"></i> Mes réalisations</p>
                     <h2>Mes projets</h2>
-
                 </div>
-
 
                 <div class="projects-grid">
 
-                    <article class="project-card">
-
+                    <article class="project-card spotlight">
                         <div class="project-image project-web">
-
-                            <img
-                                class="project-logo"
-                                src="img/technologies/html5-original.svg"
-                                alt=""
-                            >
-
+                            <i class="fa-solid fa-laptop-code"></i>
                         </div>
-
                         <div class="project-content">
-
-                            <span class="project-category">
-                                Développement Web
-                            </span>
-
-                            <h3>
-                                Portfolio personnel
-                            </h3>
-
-                            <p>
-                                Conception d’un portfolio moderne et lisible pour
-                                présenter mon profil, mes compétences et mes projets.
-                            </p>
-
-                            <div class="project-technologies">
-
-                                <span class="technology-logo">
-                                    <img src="img/technologies/html5-original.svg" alt="">
-                                    HTML5
-                                </span>
-                                <span class="technology-logo">
-                                    <img src="img/technologies/css3-original.svg" alt="">
-                                    CSS3
-                                </span>
-
+                            <span class="project-category">Développement Web</span>
+                            <h3>Portfolio personnel</h3>
+                            <p>Conception d’un portfolio moderne et lisible pour présenter mon profil, mes compétences et mes projets.</p>
+                            <div class="tags">
+                                <span class="tag"><i class="fa-brands fa-html5" style="color:#e34f26"></i> HTML5</span>
+                                <span class="tag"><i class="fa-brands fa-css3-alt" style="color:#2d8cf0"></i> CSS3</span>
                             </div>
-
-                            <a
-                                href="https://mon-porfolio-iota.vercel.app/"
-                                class="project-link"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                Voir le projet →
+                            <a href="https://mon-porfolio-iota.vercel.app/" class="project-link" target="_blank" rel="noreferrer">
+                                Voir le projet <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
-
                         </div>
-
                     </article>
 
-
-
-                    <article class="project-card">
-
+                    <article class="project-card spotlight">
                         <div class="project-image project-database">
-
-                            <img
-                                class="project-logo"
-                                src="img/technologies/mysql-original.svg"
-                                alt=""
-                            >
-
+                            <i class="fa-solid fa-database"></i>
                         </div>
-
                         <div class="project-content">
-
-                            <span class="project-category">
-                                Base de données
-                            </span>
-
-                            <h3>
-                                Projet de formation MySQL
-                            </h3>
-
-                            <p>
-                                Projet de formation consacré à la création et à la
-                                gestion d’une base de données avec MySQL.
-                            </p>
-
-                            <div class="project-technologies">
-
-                                <span>SQL</span>
-                                <span class="technology-logo">
-                                    <img src="img/technologies/mysql-original.svg" alt="">
-                                    MySQL
-                                </span>
-
+                            <span class="project-category">Base de données</span>
+                            <h3>Projet de formation MySQL</h3>
+                            <p>Projet de formation consacré à la création et à la gestion d’une base de données avec MySQL.</p>
+                            <div class="tags">
+                                <span class="tag"><i class="fa-solid fa-terminal"></i> SQL</span>
+                                <span class="tag"><img src="img/technologies/mysql-original.svg" alt="" width="16" height="16"> MySQL</span>
                             </div>
-
-                            <a
-                                href="https://github.com/SOUMAHOROHAMED/dba-formation-mysql"
-                                class="project-link"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                Voir le projet →
+                            <a href="https://github.com/SOUMAHOROHAMED/dba-formation-mysql" class="project-link" target="_blank" rel="noreferrer">
+                                Voir sur GitHub <i class="fa-brands fa-github"></i>
                             </a>
-
                         </div>
-
                     </article>
 
-
-
-                    <article class="project-card">
-
-                        <div class="project-image project-database">
-
-                            <span class="project-method-mark">MCD · MLD</span>
-
+                    <article class="project-card spotlight">
+                        <div class="project-image project-merise">
+                            <i class="fa-solid fa-diagram-project"></i>
                         </div>
-
                         <div class="project-content">
-
-                            <span class="project-category">
-                                Base de données
-                            </span>
-
-                            <h3>
-                                Modélisation MERISE : MCD et MLD
-                            </h3>
-
-                            <p>
-                                Conception du modèle conceptuel de données (MCD) et
-                                du modèle logique de données (MLD) à l’aide de la
-                                méthode MERISE.
-                            </p>
-
-                            <div class="project-technologies">
-
-                                <span>MERISE</span>
-                                <span>MCD</span>
-                                <span>MLD</span>
-                                <span>SQL</span>
-
+                            <span class="project-category">Base de données</span>
+                            <h3>Modélisation MERISE : MCD et MLD</h3>
+                            <p>Conception du modèle conceptuel de données (MCD) et du modèle logique de données (MLD) à l’aide de la méthode MERISE.</p>
+                            <div class="tags">
+                                <span class="tag">MERISE</span>
+                                <span class="tag">MCD</span>
+                                <span class="tag">MLD</span>
+                                <span class="tag">SQL</span>
                             </div>
-
-                            <a
-                                href="https://drive.google.com/drive/folders/1akG1zkPkZNkbuNHx05LeBKADI2k9gv-y?usp=sharing"
-                                class="project-link"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                Voir le projet →
+                            <a href="https://drive.google.com/drive/folders/1akG1zkPkZNkbuNHx05LeBKADI2k9gv-y?usp=sharing" class="project-link" target="_blank" rel="noreferrer">
+                                Voir le projet <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
-
                         </div>
-
                     </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
-        <section id="formation" class="section section-light">
-
+        <!-- ======================= FORMATION ======================= -->
+        <section id="formation" class="section section-alt">
             <div class="container">
 
                 <div class="section-title">
-
-                    <p>Mon parcours</p>
-
+                    <p><i class="fa-solid fa-graduation-cap"></i> Mon parcours</p>
                     <h2>Formation</h2>
-
                 </div>
-
 
                 <div class="timeline">
 
                     <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
+                        <div class="timeline-dot"><i class="fa-solid fa-building-columns"></i></div>
                         <div class="timeline-content">
-
-                            <span class="timeline-date">
-                                En cours
-                            </span>
-
-                            <h3>
-                                Licence 2 en informatique
-                            </h3>
-
-                            <p>
-                                Étudiant en deuxième année de licence specialité Base de Données à
-                                l’Université Virtuelle de Côte d’Ivoire (UVCI).
-                            </p>
-
+                            <span class="timeline-date">En cours</span>
+                            <h3>Licence 2 en informatique</h3>
+                            <p>Étudiant en deuxième année de licence, spécialité Base de Données, à l’Université Virtuelle de Côte d’Ivoire (UVCI).</p>
                         </div>
-
                     </div>
 
                     <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
+                        <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
                         <div class="timeline-content">
-
-                            <span class="timeline-date">
-                                2025–2026
-                            </span>
-
-                            <h3>
-                                Baccalauréat série C
-                            </h3>
-
-                            <p>
-                                Baccalauréat scientifique série C obtenu au
-                                Lycée Moderne de Zuenoula.
-                            </p>
-
+                            <span class="timeline-date">2025–2026</span>
+                            <h3>Baccalauréat série C</h3>
+                            <p>Baccalauréat scientifique série C obtenu au Lycée Moderne de Zuenoula.</p>
                         </div>
-
                     </div>
 
-
                     <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
+                        <div class="timeline-dot"><i class="fa-solid fa-code"></i></div>
                         <div class="timeline-content">
-
-                            <span class="timeline-date">
-                                Compétences techniques
-                            </span>
-
-                            <h3>
-                                Développement & Bases de données
-                            </h3>
-
-                            <p>
-                                Développement de compétences en HTML, CSS, SQL,
-                                MySQL, PostgreSQL, MERISE, Git, GitHub et Linux Ubuntu.
-                            </p>
-
+                            <span class="timeline-date">Compétences techniques</span>
+                            <h3>Développement &amp; Bases de données</h3>
+                            <p>Développement de compétences en HTML, CSS, SQL, MySQL, PostgreSQL, MERISE, Git, GitHub et Linux Ubuntu.</p>
                         </div>
-
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
 
+        <!-- ======================= CONTACT ======================= -->
         <section id="contact" class="section">
-
             <div class="container">
 
                 <div class="section-title">
-
-                    <p>Une question ?</p>
-
+                    <p><i class="fa-solid fa-paper-plane"></i> Une question ?</p>
                     <h2>Contactez-moi</h2>
-
                 </div>
-
 
                 <div class="contact-container">
 
-
                     <div class="contact-info">
 
-                        <h3>
-                            Parlons de votre projet
-                        </h3>
-
+                        <h3>Parlons de votre projet</h3>
                         <p>
-                            Vous pouvez me contacter pour discuter
-                            d'un projet, d'une collaboration ou simplement
-                            échanger sur l'informatique.
+                            Vous pouvez me contacter pour discuter d'un projet, d'une
+                            collaboration ou simplement échanger sur l'informatique.
                         </p>
 
-
                         <div class="contact-item">
-
-                            <div class="contact-icon">
-                                ✉️
-                            </div>
-
-                            <div>
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="contact-text">
                                 <strong>Email</strong>
-                                <p>
-                                    soumahorohamed1802@gmail.com
-                                </p>
+                                <a href="mailto:soumahorohamed1802@gmail.com">soumahorohamed1802@gmail.com</a>
                             </div>
-
+                            <button class="copy-btn" id="copy-email" data-email="soumahorohamed1802@gmail.com" aria-label="Copier l'adresse email" title="Copier">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
 
-
                         <div class="contact-item">
-
-                            <div class="contact-icon">
-                                📍
-                            </div>
-
-                            <div>
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="contact-text">
                                 <strong>Localisation</strong>
-                                <p>
-                                    Côte d'Ivoire
-                                </p>
+                                <span>Côte d'Ivoire</span>
                             </div>
-
                         </div>
 
-
                         <div class="contact-item">
-
-                            <div class="contact-icon">
-                                💻
-                            </div>
-
-                            <div>
+                            <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+                            <div class="contact-text">
                                 <strong>GitHub</strong>
-                                <a
-                                    href="https://github.com/SOUMAHOROHAMED"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    github.com/SOUMAHOROHAMED
-                                </a>
+                                <a href="https://github.com/SOUMAHOROHAMED" target="_blank" rel="noreferrer">github.com/SOUMAHOROHAMED</a>
                             </div>
-
                         </div>
 
-
                         <div class="contact-item">
-
-                            <div class="contact-icon">
-                                💬
-                            </div>
-
-                            <div>
+                            <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="contact-text">
                                 <strong>WhatsApp</strong>
-                                <a
-                                    href="https://wa.me/2250768930240"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    07 68 93 02 40
-                                </a>
+                                <a href="https://wa.me/2250768930240" target="_blank" rel="noreferrer">07 68 93 02 40</a>
                             </div>
-
                         </div>
 
                     </div>
 
-                    <form
-                        id="contact-form"
-                        class="contact-form"
-                    >
+                    <form id="contact-form" class="contact-form" novalidate>
 
                         <div class="form-group">
-
-                            <label for="nom">
-                                Nom
-                            </label>
-
-                            <input
-                                type="text"
-                                id="nom"
-                                name="nom"
-                                placeholder="Votre nom"
-                                required
-                            >
-
+                            <label for="nom"><i class="fa-regular fa-user"></i> Nom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" autocomplete="name" required>
                             <small class="error-message"></small>
-
                         </div>
-
 
                         <div class="form-group">
-
-                            <label for="email">
-                                Email
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Votre adresse email"
-                                required
-                            >
-
+                            <label for="email"><i class="fa-regular fa-envelope"></i> Email</label>
+                            <input type="email" id="email" name="email" placeholder="Votre adresse email" autocomplete="email" required>
                             <small class="error-message"></small>
-
                         </div>
-
 
                         <div class="form-group">
-
-                            <label for="message">
-                                Message
-                            </label>
-
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="6"
-                                placeholder="Votre message..."
-                                required
-                            ></textarea>
-
+                            <label for="message"><i class="fa-regular fa-comment-dots"></i> Message</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
                             <small class="error-message"></small>
-
                         </div>
 
+                        <p class="form-status" aria-live="polite"></p>
 
-                        <p
-                            class="form-status"
-                            aria-live="polite"
-                        ></p>
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary form-button"
-                        >
-                            Préparer l’envoi par e-mail
+                        <button type="submit" class="btn btn-primary form-button">
+                            <i class="fa-solid fa-paper-plane"></i> Préparer l’envoi par e-mail
                         </button>
 
                     </form>
@@ -836,98 +547,43 @@
                 </div>
 
             </div>
-
         </section>
 
     </main>
 
 
+    <!-- ======================= FOOTER ======================= -->
     <footer class="footer">
 
         <div class="container footer-container">
 
-            <div>
-
-                <h3>
-                    SOUMAHORO HAMED
-                </h3>
-
-                <p>
-                    Administrateur de bases de données junior
-                </p>
-
+            <div class="footer-brand">
+                <a href="#accueil" class="logo">
+                    <span class="logo-mark">SH</span>
+                    <span class="logo-text">Soumahoro Hamed</span>
+                </a>
+                <p>Administrateur de bases de données junior</p>
             </div>
 
-
             <div class="social-links">
-
-                <a
-                    href="https://github.com/SOUMAHOROHAMED"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub"
-                >
-                    GitHub
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/hamed-soumahoro-ba98a1390/"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                >
-                    LinkedIn
-                </a>
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591827184966&locale=fr_FR"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Facebook"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://wa.me/2250768930240"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="WhatsApp"
-                >
-                    WhatsApp
-                </a>
-
-                <a
-                    href="mailto:soumahorohamed1802@gmail.com"
-                    aria-label="Email"
-                >
-                    Email
-                </a>
-
+                <a href="https://github.com/SOUMAHOROHAMED" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/hamed-soumahoro-ba98a1390/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61591827184966&locale=fr_FR" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://wa.me/2250768930240" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="mailto:soumahorohamed1802@gmail.com" aria-label="Email" title="Email"><i class="fa-solid fa-envelope"></i></a>
             </div>
 
         </div>
 
-
         <div class="copyright">
-
-            <p>
-                © <span id="current-year"></span>
-                Hamed Soumahoro. Tous droits réservés.
-            </p>
-
+            <p>© <span id="current-year">2026</span> Hamed Soumahoro. Tous droits réservés.</p>
         </div>
 
     </footer>
 
 
-    <button
-        id="back-to-top"
-        aria-label="Retour en haut"
-    >
-        ↑
-    </button>
-
+    <button id="back-to-top" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 

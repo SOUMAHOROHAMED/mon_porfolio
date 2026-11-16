@@ -1,274 +1,256 @@
 /* =====================================================
+   OUTILS
+===================================================== */
+
+const prefersReducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const toast = document.getElementById("toast");
+let toastTimer;
+
+function showToast(message) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+}
+
+
+/* =====================================================
    MENU MOBILE
 ===================================================== */
 
 const menuToggle = document.getElementById("menu-toggle");
 const navbar = document.getElementById("navbar");
 
+function setMenu(open) {
+    navbar.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.innerHTML = open
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+}
+
 if (menuToggle && navbar) {
-
     menuToggle.addEventListener("click", () => {
+        setMenu(!navbar.classList.contains("open"));
+    });
 
-        navbar.classList.toggle("open");
+    navbar.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => setMenu(false));
+    });
 
-        if (navbar.classList.contains("open")) {
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setMenu(false);
+    });
 
-            menuToggle.textContent = "✕";
-
-        } else {
-
-            menuToggle.textContent = "☰";
-
+    document.addEventListener("pointerdown", (e) => {
+        if (
+            navbar.classList.contains("open") &&
+            !navbar.contains(e.target) &&
+            !menuToggle.contains(e.target)
+        ) {
+            setMenu(false);
         }
-
     });
-
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    navLinks.forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navbar.classList.remove("open");
-
-            menuToggle.textContent = "☰";
-
-        });
-
-    });
-
 }
 
 
 /* =====================================================
-   MODE SOMBRE
+   THÈME CLAIR / SOMBRE
 ===================================================== */
 
-const themeToggle =
-    document.getElementById("theme-toggle");
+const themeToggle = document.getElementById("theme-toggle");
+const root = document.documentElement;
 
+function applyThemeIcon() {
+    if (!themeToggle) return;
+    const isDark = root.getAttribute("data-theme") === "dark";
+    themeToggle.innerHTML = isDark
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+    themeToggle.setAttribute(
+        "aria-label",
+        isDark ? "Passer au thème clair" : "Passer au thème sombre"
+    );
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", isDark ? "#06100b" : "#f6faf7");
+}
+
+applyThemeIcon();
 
 if (themeToggle) {
-
-    const savedTheme =
-        localStorage.getItem("theme");
-
-
-    if (savedTheme === "dark") {
-
-        document.body.classList.add("dark-mode");
-
-        themeToggle.textContent = "☀️";
-
-    }
-
-
     themeToggle.addEventListener("click", () => {
-
-        document.body.classList.toggle("dark-mode");
-
-
-        const darkMode =
-            document.body.classList.contains("dark-mode");
-
-
-        if (darkMode) {
-
-            themeToggle.textContent = "☀️";
-
-            localStorage.setItem("theme", "dark");
-
-        } else {
-
-            themeToggle.textContent = "🌙";
-
-            localStorage.setItem("theme", "light");
-
-        }
-
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        applyThemeIcon();
     });
-
 }
 
 
 /* =====================================================
-   BOUTON RETOUR EN HAUT
+   SCROLL : progression, header, retour en haut, nav active
 ===================================================== */
 
-const backToTop =
-    document.getElementById("back-to-top");
+const header = document.getElementById("header");
+const progressLine = document.getElementById("scroll-progress");
+const backToTop = document.getElementById("back-to-top");
+const navLinks = document.querySelectorAll(".nav-link");
+const sections = document.querySelectorAll("main section[id]");
 
+let ticking = false;
 
-if (backToTop) {
+function onScroll() {
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
 
-    window.addEventListener("scroll", () => {
+    if (progressLine) progressLine.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    if (header) header.classList.toggle("scrolled", y > 20);
+    if (backToTop) backToTop.classList.toggle("show", y > 500);
 
-        if (window.scrollY > 400) {
-
-            backToTop.classList.add("show");
-
-        } else {
-
-            backToTop.classList.remove("show");
-
-        }
-
-    });
-
-
-    backToTop.addEventListener("click", () => {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-    });
-
-}
-
-
-/* =====================================================
-   NAVIGATION ACTIVE
-===================================================== */
-
-const navLinks =
-    document.querySelectorAll(".nav-link");
-
-const sections =
-    document.querySelectorAll("section");
-
-
-window.addEventListener("scroll", () => {
-
-    let currentSection = "";
-
-
+    let current = "";
     sections.forEach(section => {
-
-        const sectionTop =
-            section.offsetTop - 120;
-
-        const sectionHeight =
-            section.offsetHeight;
-
-
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
-
-            currentSection =
-                section.getAttribute("id");
-
-        }
-
+        if (y >= section.offsetTop - 160) current = section.id;
     });
-
 
     navLinks.forEach(link => {
-
-        link.classList.remove("active");
-
-
-        if (
-            link.getAttribute("href") ===
-            "#" + currentSection
-        ) {
-
-            link.classList.add("active");
-
-        }
-
+        link.classList.toggle("active", link.getAttribute("href") === "#" + current);
     });
 
-});
+    ticking = false;
+}
+
+window.addEventListener("scroll", () => {
+    if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+    }
+}, { passive: true });
+
+onScroll();
+
+if (backToTop) {
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    });
+}
 
 
 /* =====================================================
-   ANIMATION DES SECTIONS
+   APPARITION DES ÉLÉMENTS AU SCROLL
 ===================================================== */
 
-const revealElements =
-    document.querySelectorAll(
-        ".section-title, .about-container, .skill-card, .project-card, .timeline-item, .contact-container"
-    );
+const revealSelectors = [
+    ".section-title",
+    ".about-content",
+    ".mini-card",
+    ".stat",
+    ".skill-card",
+    ".skills-progress",
+    ".project-card",
+    ".timeline-item",
+    ".contact-info",
+    ".contact-form"
+].join(", ");
 
+const revealElements = document.querySelectorAll(revealSelectors);
 
-revealElements.forEach(element => {
+revealElements.forEach(el => {
+    el.classList.add("reveal");
 
-    element.classList.add("reveal");
-
+    // Décalage progressif entre cartes d'un même groupe
+    const siblings = el.parentElement.querySelectorAll(":scope > .reveal, :scope > .skill-card, :scope > .project-card, :scope > .stat, :scope > .mini-card");
+    const position = Array.prototype.indexOf.call(siblings, el);
+    el.style.setProperty("--delay", Math.max(position, 0) * 0.08 + "s");
 });
 
+if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 
-const observer =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.15
-        }
-    );
-
-
-revealElements.forEach(element => {
-
-    observer.observe(element);
-
-});
+    revealElements.forEach(el => observer.observe(el));
+} else {
+    revealElements.forEach(el => el.classList.add("visible"));
+}
 
 
 /* =====================================================
    BARRES DE COMPÉTENCES
 ===================================================== */
 
-const progressBars =
-    document.querySelectorAll(".progress");
+const progressBars = document.querySelectorAll(".progress");
+
+if ("IntersectionObserver" in window) {
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.width = entry.target.dataset.width;
+                barObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => barObserver.observe(bar));
+} else {
+    progressBars.forEach(bar => (bar.style.width = bar.dataset.width));
+}
 
 
-const progressObserver =
-    new IntersectionObserver(
-        (entries) => {
+/* =====================================================
+   COMPTEURS ANIMÉS
+===================================================== */
 
-            entries.forEach(entry => {
+const counters = document.querySelectorAll("[data-count]");
 
-                if (entry.isIntersecting) {
+function animateCounter(el) {
+    const target = parseInt(el.dataset.count, 10);
+    if (prefersReducedMotion) { el.textContent = target; return; }
 
-                    const width =
-                        entry.target.dataset.width;
+    const duration = 1200;
+    const start = performance.now();
 
-                    entry.target.style.width = width;
+    function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
 
-                }
+if ("IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.6 });
 
-            });
-
-        },
-        {
-            threshold: 0.5
-        }
-    );
+    counters.forEach(c => counterObserver.observe(c));
+}
 
 
-progressBars.forEach(bar => {
+/* =====================================================
+   EFFET "SPOTLIGHT" SUR LES CARTES
+===================================================== */
 
-    progressObserver.observe(bar);
-
+document.querySelectorAll(".spotlight").forEach(card => {
+    card.addEventListener("pointermove", (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", e.clientX - rect.left + "px");
+        card.style.setProperty("--my", e.clientY - rect.top + "px");
+    });
 });
 
 
@@ -276,184 +258,110 @@ progressBars.forEach(bar => {
    EFFET DE FRAPPE
 ===================================================== */
 
-const typingElement =
-    document.getElementById("typing-text");
+const typingElement = document.getElementById("typing-text");
 
-
-const text =
-    "Administrateur de bases de données junior";
-
-
-let index = 0;
-
-
-function typeWriter() {
-
-    if (!typingElement) {
-
-        return;
-
-    }
-
-    if (index < text.length) {
-
-        typingElement.textContent += text.charAt(index);
-
-        index++;
-
-        setTimeout(typeWriter, 50);
-
-    }
-
-}
-
-
-/*
-   On vide le texte HTML avant
-   de lancer l'animation.
-*/
-
-if (typingElement) {
+if (typingElement && !prefersReducedMotion) {
+    const text = typingElement.textContent.trim();
+    let index = 0;
 
     typingElement.textContent = "";
 
-    typeWriter();
-
+    (function typeWriter() {
+        if (index < text.length) {
+            typingElement.textContent += text.charAt(index++);
+            setTimeout(typeWriter, 45);
+        }
+    })();
 }
 
 
 /* =====================================================
-   VALIDATION DU FORMULAIRE
+   COPIER L'EMAIL
 ===================================================== */
 
-const form =
-    document.getElementById("contact-form");
+const copyButton = document.getElementById("copy-email");
 
-const statusMessage =
-    document.querySelector(".form-status");
+if (copyButton) {
+    copyButton.addEventListener("click", async () => {
+        const email = copyButton.dataset.email;
 
+        try {
+            await navigator.clipboard.writeText(email);
+            showToast("Adresse email copiée ✓");
+        } catch (e) {
+            showToast("Impossible de copier automatiquement");
+        }
+    });
+}
+
+
+/* =====================================================
+   FORMULAIRE DE CONTACT
+===================================================== */
+
+const form = document.getElementById("contact-form");
+const statusMessage = document.querySelector(".form-status");
+
+function setError(input, message) {
+    const group = input.closest(".form-group");
+    const error = group.querySelector(".error-message");
+    error.textContent = message;
+    group.classList.toggle("has-error", Boolean(message));
+}
 
 if (form) {
+    ["nom", "email", "message"].forEach(id => {
+        document.getElementById(id).addEventListener("input", (e) => setError(e.target, ""));
+    });
 
     form.addEventListener("submit", (event) => {
-
         event.preventDefault();
 
-
-        const nom =
-            document.getElementById("nom");
-
-        const email =
-            document.getElementById("email");
-
-        const message =
-            document.getElementById("message");
-
+        const nom = document.getElementById("nom");
+        const email = document.getElementById("email");
+        const message = document.getElementById("message");
 
         let valid = true;
 
+        statusMessage.textContent = "";
+        statusMessage.classList.remove("error");
 
-        if (statusMessage) {
-
-            statusMessage.textContent = "";
-
-            statusMessage.classList.remove("error");
-
-        }
-
-
-        /* Nettoyage des erreurs */
-
-        document
-            .querySelectorAll(".error-message")
-            .forEach(error => {
-
-                error.textContent = "";
-
-            });
-
-
-        /* Nom */
+        setError(nom, "");
+        setError(email, "");
+        setError(message, "");
 
         if (nom.value.trim().length < 2) {
-
-            nom
-                .nextElementSibling
-                .textContent =
-                "Veuillez entrer votre nom.";
-
+            setError(nom, "Veuillez entrer votre nom.");
             valid = false;
-
         }
 
-
-        /* Email */
-
-        const emailRegex =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (!emailRegex.test(email.value.trim())) {
-
-            email
-                .nextElementSibling
-                .textContent =
-                "Veuillez entrer une adresse email valide.";
-
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+            setError(email, "Veuillez entrer une adresse email valide.");
             valid = false;
-
         }
-
-
-        /* Message */
 
         if (message.value.trim().length < 10) {
-
-            message
-                .nextElementSibling
-                .textContent =
-                "Votre message doit contenir au moins 10 caractères.";
-
+            setError(message, "Votre message doit contenir au moins 10 caractères.");
             valid = false;
-
         }
 
-
-        /* Si tout est correct */
-
-        if (valid) {
-
-            const subject =
-                encodeURIComponent("Message depuis le portfolio");
-
-            const body =
-                encodeURIComponent(
-                    `Nom : ${nom.value.trim()}\nEmail : ${email.value.trim()}\n\n${message.value.trim()}`
-                );
-
-            if (statusMessage) {
-
-                statusMessage.textContent =
-                    "Votre messagerie va s’ouvrir avec le message. Pensez à confirmer l’envoi.";
-
-                statusMessage.classList.remove("error");
-
-            }
-
-            window.location.href =
-                `mailto:soumahorohamed1802@gmail.com?subject=${subject}&body=${body}`;
-
-        } else if (statusMessage) {
-
-            statusMessage.textContent =
-                "Veuillez corriger les informations du formulaire.";
-
+        if (!valid) {
+            statusMessage.textContent = "Veuillez corriger les informations du formulaire.";
             statusMessage.classList.add("error");
-
+            return;
         }
 
-    });
+        const subject = encodeURIComponent("Message depuis le portfolio");
+        const body = encodeURIComponent(
+            `Nom : ${nom.value.trim()}\nEmail : ${email.value.trim()}\n\n${message.value.trim()}`
+        );
 
+        statusMessage.textContent =
+            "Votre messagerie va s’ouvrir avec le message. Pensez à confirmer l’envoi.";
+
+        window.location.href =
+            `mailto:soumahorohamed1802@gmail.com?subject=${subject}&body=${body}`;
+    });
 }
 
 
@@ -461,13 +369,5 @@ if (form) {
    ANNÉE AUTOMATIQUE
 ===================================================== */
 
-const currentYear =
-    document.getElementById("current-year");
-
-
-if (currentYear) {
-
-    currentYear.textContent =
-        new Date().getFullYear();
-
-}
+const currentYear = document.getElementById("current-year");
+if (currentYear) currentYear.textContent = new Date().getFullYear();
