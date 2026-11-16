@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
 
@@ -10,46 +10,76 @@
         content="Portfolio de Hamed Soumahoro, Administrateur de bases de données junior."
     >
 
+    <meta name="theme-color" content="#06110e">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio - Hamed Soumahoro">
+    <meta property="og:description" content="Portfolio de Hamed Soumahoro, Administrateur de bases de données junior.">
+    <meta property="og:image" content="https://mon-porfolio-iota.vercel.app/img/photodeprofil.jpeg">
+    <meta property="og:url" content="https://mon-porfolio-iota.vercel.app/">
     <title>Portfolio - Hamed Soumahoro</title>
 
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2306110e'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='24' fill='%2334d399'%3ESH%3C/text%3E%3C/svg%3E">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            const selectedTheme = savedTheme === "light" || savedTheme === "dark"
+                ? savedTheme
+                : (systemPrefersLight ? "light" : "dark");
+            document.documentElement.dataset.theme = selectedTheme;
+        }());
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-   
+    <a class="skip-link" href="#accueil">Aller au contenu</a>
+    <div id="scroll-progress" aria-hidden="true"><span></span></div>
+    <div class="bg-glow" aria-hidden="true"></div>
 
     <header class="header">
 
         <div class="container nav-container">
 
-            <a href="#accueil" class="logo">
-                SOUMAHORO HAMED
+            <a href="#accueil" class="logo" aria-label="SOUMAHORO HAMED - Accueil">
+                <span class="logo-mark" aria-hidden="true">SH</span>
+                <span>SOUMAHORO HAMED</span>
             </a>
 
             <nav class="navbar" id="navbar">
 
                 <a href="#accueil" class="nav-link active">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
                     Accueil
                 </a>
 
                 <a href="#apropos" class="nav-link">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
                     À propos
                 </a>
 
                 <a href="#competences" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Compétences
                 </a>
 
                 <a href="#projets" class="nav-link">
+                    <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
                     Projets
                 </a>
 
                 <a href="#formation" class="nav-link">
+                    <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
                     Formation
                 </a>
 
                 <a href="#contact" class="nav-link">
+                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
                     Contact
                 </a>
 
@@ -60,17 +90,21 @@
                 <button
                     id="theme-toggle"
                     class="theme-button"
-                    aria-label="Changer le thème"
+                    type="button"
+                    aria-label="Passer au thème clair"
                 >
-                    🌙
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
                 </button>
 
                 <button
                     id="menu-toggle"
                     class="menu-button"
                     aria-label="Ouvrir le menu"
+                    aria-controls="navbar"
+                    aria-expanded="false"
+                    type="button"
                 >
-                    ☰
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
                 </button>
 
             </div>
@@ -89,17 +123,17 @@
 
                 <div class="hero-content">
 
+                    <p class="hero-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Licence 2 · Spécialité Base de Données</p>
+
                     <p class="hero-small">
                         Bonjour, je suis
                     </p>
 
                     <h1>
-                        Hamed Soumahoro
+                        Hamed <span>Soumahoro</span>
                     </h1>
 
-                    <h2 id="typing-text">
-                        Administrateur de bases de données junior
-                    </h2>
+                    <h2 class="typing-line"><i class="fa-solid fa-database" aria-hidden="true"></i> <span id="typing-text">Administrateur de bases de données junior</span><span class="typing-cursor" aria-hidden="true"></span></h2>
 
                     <p class="hero-description">
                         Étudiant en informatique passionné par le développement
@@ -110,13 +144,20 @@
                     <div class="hero-buttons">
 
                         <a href="#projets" class="btn btn-primary">
-                            Voir mes projets
+                            Voir mes projets <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
 
                         <a href="#contact" class="btn btn-secondary">
-                            Me contacter
+                            Me contacter <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
                         </a>
 
+                    </div>
+
+                    <div class="hero-socials" aria-label="Réseaux sociaux">
+                        <a href="https://github.com/SOUMAHOROHAMED" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/hamed-soumahoro-ba98a1390/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/2250768930240" target="_blank" rel="noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="mailto:soumahorohamed1802@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a>
                     </div>
 
                 </div>
@@ -132,6 +173,13 @@
                         >
 
                     </div>
+                    <div class="tech-float tech-postgres"><span class="light-logo"><img src="img/technologies/postgresql-original.svg" alt=""></span><span>PostgreSQL</span></div>
+                    <div class="tech-float tech-mysql"><span class="light-logo"><img src="img/technologies/mysql-original.svg" alt=""></span><span>MySQL</span></div>
+                    <div class="tech-float tech-ubuntu"><img src="img/technologies/ubuntu-original.svg" alt=""><span>Ubuntu</span></div>
+                    <div class="terminal-card" aria-label="Requête SQL décorative">
+                        <div class="terminal-top"><span></span><span></span><span></span><code>requete.sql</code></div>
+                        <pre><span>SELECT</span> competences FROM hamed WHERE passion = <em>'données'</em>;</pre>
+                    </div>
 
                 </div>
 
@@ -139,7 +187,14 @@
 
         </section>
 
-
+        <section class="stats-section" aria-label="Quelques chiffres">
+            <div class="container stats-grid">
+                <article class="stat-card reveal"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><strong>L<span class="counter" data-target="2">0</span></strong><span>Licence</span></article>
+                <article class="stat-card reveal"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><strong class="counter" data-target="3">0</strong><span>Projets</span></article>
+                <article class="stat-card reveal"><i class="fa-solid fa-code" aria-hidden="true"></i><strong class="counter" data-target="9">0</strong><span>Technologies</span></article>
+                <article class="stat-card reveal"><i class="fa-solid fa-database" aria-hidden="true"></i><strong>BDD</strong><span>Spécialité</span></article>
+            </div>
+        </section>
 
         <section id="apropos" class="section">
 
@@ -147,7 +202,7 @@
 
                 <div class="section-title">
 
-                    <p>Découvrez mon parcours</p>
+                    <p class="section-kicker"><i class="fa-solid fa-user" aria-hidden="true"></i> Découvrez mon parcours</p>
 
                     <h2>À propos de moi</h2>
 
@@ -183,9 +238,15 @@
                         </p>
 
                         <a href="#contact" class="btn btn-primary">
-                            Parlons ensemble
+                            Parlons ensemble <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
 
+                    </div>
+
+                    <div class="about-highlights">
+                        <article class="highlight-card"><span class="highlight-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span><h3>Performance</h3></article>
+                        <article class="highlight-card"><span class="highlight-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><h3>Sécurité</h3></article>
+                        <article class="highlight-card"><span class="highlight-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span><h3>Disponibilité</h3></article>
                     </div>
 
                 </div>
@@ -202,7 +263,7 @@
 
                 <div class="section-title">
 
-                    <p>Mes domaines de compétences</p>
+                    <p class="section-kicker"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Mes domaines de compétences</p>
 
                     <h2>Mes compétences</h2>
 
@@ -213,9 +274,7 @@
 
                     <div class="skill-card">
 
-                        <div class="skill-icon">
-                            <img src="img/technologies/html5-original.svg" alt="">
-                        </div>
+                        <div class="skill-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
 
                         <h3>Développement Web</h3>
 
@@ -242,9 +301,7 @@
 
                     <div class="skill-card">
 
-                        <div class="skill-icon">
-                            <img src="img/technologies/mysql-original.svg" alt="">
-                        </div>
+                        <div class="skill-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
 
                         <h3>Bases de données</h3>
 
@@ -255,13 +312,13 @@
 
                         <div class="skill-list">
 
-                            <span>SQL</span>
+                            <span><i class="fa-solid fa-terminal" aria-hidden="true"></i> SQL</span>
                             <span class="technology-logo">
-                                <img src="img/technologies/mysql-original.svg" alt="">
+                                <span class="light-logo"><img src="img/technologies/mysql-original.svg" alt=""></span>
                                 MySQL
                             </span>
                             <span class="technology-logo">
-                                <img src="img/technologies/postgresql-original.svg" alt="">
+                                <span class="light-logo"><img src="img/technologies/postgresql-original.svg" alt=""></span>
                                 PostgreSQL
                             </span>
 
@@ -272,9 +329,7 @@
 
                     <div class="skill-card">
 
-                        <div class="skill-icon">
-                            <span class="method-mark">MCD<br>MLD</span>
-                        </div>
+                        <div class="skill-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
 
                         <h3>Conception de bases de données</h3>
 
@@ -285,8 +340,8 @@
 
                         <div class="skill-list">
 
-                            <span>MERISE</span>
-                            <span>Modélisation</span>
+                            <span><i class="fa-solid fa-sitemap" aria-hidden="true"></i> MERISE</span>
+                            <span><i class="fa-solid fa-cubes" aria-hidden="true"></i> Modélisation</span>
 
                         </div>
 
@@ -295,9 +350,7 @@
 
                     <div class="skill-card">
 
-                        <div class="skill-icon">
-                            <img src="img/technologies/git-original.svg" alt="">
-                        </div>
+                        <div class="skill-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
 
                         <h3>Outils informatiques</h3>
 
@@ -328,61 +381,26 @@
                 </div>
 
 
-                <div class="skills-progress">
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>HTML / CSS</span>
-                            <span>70%</span>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="70%"
-                            ></div>
-                        </div>
-
+                <div class="skills-progress-card">
+                    <div class="progress-heading">
+                        <p class="section-kicker"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Progression</p>
+                        <h3>Niveau actuel</h3>
                     </div>
-
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>SQL / MySQL / PostgreSQL</span>
-                            <span>50%</span>
+                    <div class="skills-progress">
+                        <div class="progress-item">
+                            <div class="progress-info"><span>HTML / CSS</span><span>70%</span></div>
+                            <div class="progress-bar"><div class="progress" data-width="70%"></div></div>
                         </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="50%"
-                            ></div>
+                        <div class="progress-item">
+                            <div class="progress-info"><span>SQL / MySQL / PostgreSQL</span><span>50%</span></div>
+                            <div class="progress-bar"><div class="progress" data-width="50%"></div></div>
                         </div>
-
+                        <div class="progress-item">
+                            <div class="progress-info"><span>MERISE / Modélisation</span><span>65%</span></div>
+                            <div class="progress-bar"><div class="progress" data-width="65%"></div></div>
+                        </div>
                     </div>
-
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>MERISE / Modélisation</span>
-                            <span>65%</span>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div
-                                class="progress"
-                                data-width="65%"
-                            ></div>
-                        </div>
-
-                    </div>
-
                 </div>
-
-            </div>
 
         </section>
 
@@ -394,7 +412,7 @@
 
                 <div class="section-title">
 
-                    <p>Mes réalisations</p>
+                    <p class="section-kicker"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Mes réalisations</p>
 
                     <h2>Mes projets</h2>
 
@@ -406,18 +424,14 @@
                     <article class="project-card">
 
                         <div class="project-image project-web">
-
-                            <img
-                                class="project-logo"
-                                src="img/technologies/html5-original.svg"
-                                alt=""
-                            >
+                            <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
 
                         </div>
 
                         <div class="project-content">
 
                             <span class="project-category">
+                                <i class="fa-solid fa-code" aria-hidden="true"></i>
                                 Développement Web
                             </span>
 
@@ -449,7 +463,7 @@
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                Voir le projet →
+                                Voir le projet <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                             </a>
 
                         </div>
@@ -461,18 +475,14 @@
                     <article class="project-card">
 
                         <div class="project-image project-database">
-
-                            <img
-                                class="project-logo"
-                                src="img/technologies/mysql-original.svg"
-                                alt=""
-                            >
+                            <i class="fa-solid fa-database" aria-hidden="true"></i>
 
                         </div>
 
                         <div class="project-content">
 
                             <span class="project-category">
+                                <i class="fa-solid fa-database" aria-hidden="true"></i>
                                 Base de données
                             </span>
 
@@ -501,7 +511,7 @@
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                Voir le projet →
+                                Voir le projet <i class="fa-brands fa-github" aria-hidden="true"></i>
                             </a>
 
                         </div>
@@ -513,7 +523,7 @@
                     <article class="project-card">
 
                         <div class="project-image project-database">
-
+                            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
                             <span class="project-method-mark">MCD · MLD</span>
 
                         </div>
@@ -521,6 +531,7 @@
                         <div class="project-content">
 
                             <span class="project-category">
+                                <i class="fa-solid fa-database" aria-hidden="true"></i>
                                 Base de données
                             </span>
 
@@ -549,7 +560,7 @@
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                Voir le projet →
+                                Voir le projet <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                             </a>
 
                         </div>
@@ -569,7 +580,7 @@
 
                 <div class="section-title">
 
-                    <p>Mon parcours</p>
+                    <p class="section-kicker"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Mon parcours</p>
 
                     <h2>Formation</h2>
 
@@ -580,7 +591,7 @@
 
                     <div class="timeline-item">
 
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
 
                         <div class="timeline-content">
 
@@ -603,7 +614,7 @@
 
                     <div class="timeline-item">
 
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
 
                         <div class="timeline-content">
 
@@ -627,7 +638,7 @@
 
                     <div class="timeline-item">
 
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
 
                         <div class="timeline-content">
 
@@ -661,7 +672,7 @@
 
                 <div class="section-title">
 
-                    <p>Une question ?</p>
+                    <p class="section-kicker"><i class="fa-regular fa-envelope" aria-hidden="true"></i> Une question ?</p>
 
                     <h2>Contactez-moi</h2>
 
@@ -686,15 +697,14 @@
 
                         <div class="contact-item">
 
-                            <div class="contact-icon">
-                                ✉️
-                            </div>
+                            <div class="contact-icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
 
                             <div>
                                 <strong>Email</strong>
-                                <p>
+                                <p id="contact-email">
                                     soumahorohamed1802@gmail.com
                                 </p>
+                                <button class="copy-button" id="copy-email" type="button" aria-label="Copier l’adresse e-mail"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copier l'email</button>
                             </div>
 
                         </div>
@@ -702,9 +712,7 @@
 
                         <div class="contact-item">
 
-                            <div class="contact-icon">
-                                📍
-                            </div>
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
 
                             <div>
                                 <strong>Localisation</strong>
@@ -718,9 +726,7 @@
 
                         <div class="contact-item">
 
-                            <div class="contact-icon">
-                                💻
-                            </div>
+                            <div class="contact-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></div>
 
                             <div>
                                 <strong>GitHub</strong>
@@ -729,6 +735,7 @@
                                     target="_blank"
                                     rel="noreferrer"
                                 >
+                                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                                     github.com/SOUMAHOROHAMED
                                 </a>
                             </div>
@@ -738,9 +745,7 @@
 
                         <div class="contact-item">
 
-                            <div class="contact-icon">
-                                💬
-                            </div>
+                            <div class="contact-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></div>
 
                             <div>
                                 <strong>WhatsApp</strong>
@@ -749,6 +754,7 @@
                                     target="_blank"
                                     rel="noreferrer"
                                 >
+                                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                                     07 68 93 02 40
                                 </a>
                             </div>
@@ -760,11 +766,13 @@
                     <form
                         id="contact-form"
                         class="contact-form"
+                        novalidate
                     >
 
                         <div class="form-group">
 
                             <label for="nom">
+                                <i class="fa-regular fa-user" aria-hidden="true"></i>
                                 Nom
                             </label>
 
@@ -773,10 +781,11 @@
                                 id="nom"
                                 name="nom"
                                 placeholder="Votre nom"
+                                aria-describedby="nom-error"
                                 required
                             >
 
-                            <small class="error-message"></small>
+                            <small class="error-message" id="nom-error"></small>
 
                         </div>
 
@@ -784,6 +793,7 @@
                         <div class="form-group">
 
                             <label for="email">
+                                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
                                 Email
                             </label>
 
@@ -792,10 +802,11 @@
                                 id="email"
                                 name="email"
                                 placeholder="Votre adresse email"
+                                aria-describedby="email-error"
                                 required
                             >
 
-                            <small class="error-message"></small>
+                            <small class="error-message" id="email-error"></small>
 
                         </div>
 
@@ -803,6 +814,7 @@
                         <div class="form-group">
 
                             <label for="message">
+                                <i class="fa-regular fa-message" aria-hidden="true"></i>
                                 Message
                             </label>
 
@@ -811,10 +823,11 @@
                                 name="message"
                                 rows="6"
                                 placeholder="Votre message..."
+                                aria-describedby="message-error"
                                 required
                             ></textarea>
 
-                            <small class="error-message"></small>
+                            <small class="error-message" id="message-error"></small>
 
                         </div>
 
@@ -828,7 +841,7 @@
                             type="submit"
                             class="btn btn-primary form-button"
                         >
-                            Préparer l’envoi par e-mail
+                            Préparer l’envoi par e-mail <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
                         </button>
 
                     </form>
@@ -848,9 +861,7 @@
 
             <div>
 
-                <h3>
-                    SOUMAHORO HAMED
-                </h3>
+                <a href="#accueil" class="logo footer-logo"><span class="logo-mark" aria-hidden="true">SH</span><span>SOUMAHORO HAMED</span></a>
 
                 <p>
                     Administrateur de bases de données junior
@@ -867,7 +878,7 @@
                     rel="noreferrer"
                     aria-label="GitHub"
                 >
-                    GitHub
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
                 </a>
 
                 <a
@@ -876,7 +887,7 @@
                     rel="noreferrer"
                     aria-label="LinkedIn"
                 >
-                    LinkedIn
+                    <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                 </a>
 
                 <a
@@ -885,7 +896,7 @@
                     rel="noreferrer"
                     aria-label="Facebook"
                 >
-                    Facebook
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                 </a>
 
                 <a
@@ -894,14 +905,14 @@
                     rel="noreferrer"
                     aria-label="WhatsApp"
                 >
-                    WhatsApp
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                 </a>
 
                 <a
                     href="mailto:soumahorohamed1802@gmail.com"
                     aria-label="Email"
                 >
-                    Email
+                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
                 </a>
 
             </div>
@@ -923,11 +934,14 @@
 
     <button
         id="back-to-top"
+        class="icon-button"
+        type="button"
         aria-label="Retour en haut"
     >
-        ↑
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </button>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 
